@@ -1,0 +1,61 @@
+/* page bg */
+body { 
+    background-color: #212226;
+}
+
+/* all text */
+p, h1, h2, h3, a {
+    color: white;
+    font-family: Inter
+}
+
+a:hover {
+    color: rgb(216, 216, 216);
+}
+
+#links > a {
+    padding: 3px;
+    background-color: #ff9a00;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#logo {
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+#links {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: none;
+    color: white;
+    padding: 10px;
+}
+
+header {
+    position: relative;
+    width: 100%;
+}
+
+#credits {
+    color: #b6b6b6;
+    font-size: smaller;
+}
+
+#nyabtn {
+    background-color: #ff9a00;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
