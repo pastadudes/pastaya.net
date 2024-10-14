@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-      </style>     
+    </style>     
   </head>
   <body>
     <header>
@@ -27,20 +27,13 @@
       </div>
     </header>
     
-    
     <h1>pastaya's website: Home of Spaghetti since 2024</h1>
     <p>
       i am pastaya, i do coding and no im not an egyptian/italian restaurant
     </p>
-    <h3>
-      
-    </h3>
-    <!-- very cool button nya! -->
-    <!-- this is supposed to be a global counter but oh well idk -->
+    
     <div id="button">
-      <!-- real nya count -->
       <p id="counterElement">nya!: <span id="counterNum">0</span></p>
-
       <button
         type="button"
         name="nyabtn"
@@ -52,15 +45,36 @@
       </button>
     </div>
 
-    
     <script type="text/javascript">
-      let clickCount = 0;
-      function btnClicked() {
-        console.log("btnClicked!");
-        var numElement = document.getElementById("counterNum");
-        numElement.textContent = ++clickCount; // more click count plsss
+      // Function to update the counter display
+      async function updateDisplay() {
+        const response = await fetch('https://pastaya.net/count'); // Fetch current count from server
+        const data = await response.json();
+        document.getElementById("counterNum").textContent = data.count; // Update counter on UI
       }
+
+      // Function to handle button click
+      async function btnClicked() {
+        console.log("btnClicked!");
+        const response = await fetch('https://pastaya.net/increment', { // Call server to increment counter
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json(); // Get new count from server
+          document.getElementById("counterNum").textContent = data.count; // Update counter on UI
+        } else {
+          console.error('Error incrementing the counter');
+        }
+      }
+
+      // Initial display update
+      updateDisplay(); // Load current count from server on page load
     </script>
+
     <footer>
       <p id="credits">
         dark mode and other things by sobakintech
