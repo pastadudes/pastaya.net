@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to SQLite database at the specified path
-const db = new sqlite3.Database('../counter.db', (err) => {
+const db = new sqlite3.Database('../../counter.db', (err) => {
     if (err) {
         console.error('Error opening database ' + err.message);
     } else {
