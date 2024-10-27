@@ -44,10 +44,34 @@
     </footer>
 
     <script>
-      let counter = 0;
+      function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+      }
+
+      function getCookie(name) {
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArr = decodedCookie.split(';');
+        for (let i = 0; i < cookieArr.length; i++) {
+          let cookiePair = cookieArr[i].trim();
+          if (cookiePair.startsWith(name + "=")) {
+            return cookiePair.split('=')[1];
+          }
+        }
+        return "";
+      }
+
+      let counter = parseInt(getCookie("clickCounter")) || 0;
+      console.log("nya button count retrieved", counter);
+      console.log("this is a local thing alr, im too lazy to make this global")
+      document.getElementById("counterNum").textContent = counter;
+
       function incrementCounter() {
         counter++;
         document.getElementById("counterNum").textContent = counter;
+        setCookie("clickCounter", counter, 7);
       }
     </script>
   </body>
