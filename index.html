@@ -21,9 +21,8 @@
     <header>
       <a href="/"><img src="/assets/images/logo.png" alt="logo" id="logo"/></a>
       <div id="links">
-        <a href="subpages/steamscam/index.html">steam scam lmao</a>
-        <a href="grainos">download grainos</a>
         <a href="https://github.com/pastadudes/pastaya.net">github</a>
+        <a href="mailto:contact@pastaya.net">email</a>
       </div>
     </header>
     
@@ -43,36 +42,6 @@
       </p>
     </footer>
 
-    <script>
-      function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        const expires = "expires=" + date.toUTCString();
-        document.cookie = name + "=" + value + ";" + expires + ";path=/";
-      }
-
-      function getCookie(name) {
-        const decodedCookie = decodeURIComponent(document.cookie);
-        const cookieArr = decodedCookie.split(';');
-        for (let i = 0; i < cookieArr.length; i++) {
-          let cookiePair = cookieArr[i].trim();
-          if (cookiePair.startsWith(name + "=")) {
-            return cookiePair.split('=')[1];
-          }
-        }
-        return "";
-      }
-
-      let counter = parseInt(getCookie("clickCounter")) || 0;
-      console.log("nya button count retrieved", counter);
-      console.log("this is a local thing alr, im too lazy to make this global")
-      document.getElementById("counterNum").textContent = counter;
-
-      function incrementCounter() {
-        counter++;
-        document.getElementById("counterNum").textContent = counter;
-        setCookie("clickCounter", counter, 7);
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
