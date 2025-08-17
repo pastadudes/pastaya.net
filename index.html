@@ -1,68 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:title" content="pastaya's website">
-    <meta property="og:description" content="my website">
-    <meta property="og:url" content="https://pastaya.net">
-    <meta property="og:image" content="https://pastaya.net/assets/images/carbonara.jpg">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="pastaya.net">
-    
+    <meta property="og:title" content="pastaya's website" />
+    <meta property="og:description" content="my website" />
+    <meta property="og:url" content="https://pastaya.net" />
+    <meta
+      property="og:image"
+      content="https://pastaya.net/assets/images/carbonara.jpg"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="pastaya.net" />
+
     <title>pastaya's site</title>
     <link rel="stylesheet" href="/main.css" />
-    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
-      <a href="/"><img src="/assets/images/logo.png" alt="logo" id="logo"/></a>
+      <a href="/"><img src="/assets/images/logo.png" alt="logo" id="logo" /></a>
       <div id="links">
         <a href="https://github.com/pastadudes/pastaya.net">github</a>
         <a href="mailto:contact@pastaya.net">email</a>
       </div>
     </header>
-    
+
     <h1>pastaya's website: Home of Spaghetti since 2024</h1>
     <p>
       i am pastaya, i do coding and no im not an egyptian/italian restaurant
     </p>
-    
+
     <div id="button">
       <p id="counterElement">nya!: <span id="counterNum">0</span></p>
-      <button type="button" id="nyabtn" onclick="incrementCounter()">nya!</button>
+      <button type="button" id="nyabtn" onclick="incrementCounter()">
+        nya!
+      </button>
     </div>
 
+    <a href="https://endsoftwarepatents.org/innovating-without-patents"
+      ><img
+        style="height: 45px"
+        src="https://static.fsf.org/nosvn/esp/logos/patent-free.svg"
+    /></a>
+
     <footer>
-      <p id="credits">
-        dark mode and other things by sobakintech
-      </p>
+      <p id="credits">dark mode and other things by sobakintech</p>
     </footer>
 
     <script>
       function setCookie(name, value, days) {
         const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
         const expires = "expires=" + date.toUTCString();
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
       }
       function getCookie(name) {
         const decodedCookie = decodeURIComponent(document.cookie);
-        const cookieArr = decodedCookie.split(';');
+        const cookieArr = decodedCookie.split(";");
         for (let i = 0; i < cookieArr.length; i++) {
           let cookiePair = cookieArr[i].trim();
           if (cookiePair.startsWith(name + "=")) {
-            return cookiePair.split('=')[1];
+            return cookiePair.split("=")[1];
           }
         }
         return "";
       }
       let counter = parseInt(getCookie("clickCounter")) || 0;
       console.log("nya button count retrieved", counter);
-      console.log("this is a local thing alr, im too lazy to make this global")
+      console.log("this is a local thing alr, im too lazy to make this global");
       document.getElementById("counterNum").textContent = counter;
       function incrementCounter() {
         counter++;
