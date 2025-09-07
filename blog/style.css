@@ -1,0 +1,80 @@
+/* shh don't tell linux torvalds that this is the firefox usercontent.css file from lore.kernel.org */
+/* well in any way the attriubtion is up here, unlincensed by the way cuz this isn't mine */
+* {
+  font-size: 100% !important;
+  font-family: monospace !important;
+  background: #000 !important;
+  color: #ccc !important;
+}
+
+pre {
+  white-space: pre-wrap !important;
+}
+
+a:link {
+  color: #69f !important;
+  text-decoration: none !important;
+}
+a:visited {
+  color: #96f !important;
+}
+
+.q {
+  color: #09f !important;
+}
+
+.add {
+  color: #0ff !important;
+}
+
+.del {
+  color: #f0f !important;
+}
+
+.head {
+  color: #fff !important;
+}
+
+.hunk {
+  color: #c93 !important;
+}
+
+.hl.num {
+  color: #f30 !important;
+}
+
+.hl.esc {
+  color: #f0f !important;
+}
+
+.hl.str {
+  color: #f30 !important;
+}
+
+.hl.ppc {
+  color: #f0f !important;
+}
+
+.hl.pps {
+  color: #f30 !important;
+}
+
+.hl.slc {
+  color: #09f !important;
+}
+
+.hl.com {
+  color: #09f !important;
+}
+
+.hl.kwa {
+  color: #ff0 !important;
+}
+
+.hl.kwb {
+  color: #0f0 !important;
+}
+
+.hl.kwc {
+  color: #ff0 !important;
+}
