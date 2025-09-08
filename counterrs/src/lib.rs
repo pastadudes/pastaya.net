@@ -16,8 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// HEY! special_effects() is a STUB!! PLEASE HELP EXPAND IT!
 use wasm_bindgen::prelude::*;
-use web_sys::{Storage, window};
+use web_sys::{Storage, console, window};
+
+// setup local storage instead of cookies
 
 fn storage() -> Storage {
     window().unwrap().local_storage().unwrap().unwrap()
@@ -45,12 +48,19 @@ pub fn init_counter() -> u32 {
 pub fn increment_counter() -> u32 {
     let next = read_count().saturating_add(1);
     write_count(next);
+    special_effects();
     next
 }
 
+#[wasm_bindgen]
 pub fn special_effects() {
-    todo!(
-        "add special effects like showing the 67 kid when the number is 67 or playing whats 9
-        + 10 audio etc."
-    )
+    let count = read_count(); // debating if i should've made it a reference
+
+    match count {
+        21 => console::log_1(&"ay man whats 9 + 10?? 21. u stupid".into()),
+        67 => console::log_1(&"HOW MANY LETTERS IN MANGO AND IN MUSTARD??? 6 7".into()),
+        _ => {} // how am i supposed to do nothing???
+
+                // TODO: make these ACTUALLY change DOM and play sound effects
+    }
 }
