@@ -5,6 +5,8 @@
  * It reduces eyestrain for me, and energy usage for all:
  * https://en.wikipedia.org/wiki/Light-on-dark_color_scheme
  */
+
+/* source: https://lore.kernel.org/+/216dark.css?67c1dabc */
 * {
   font-size: 100%;
   font-family: monospace;
