@@ -47,3 +47,10 @@ pub fn increment_counter() -> u32 {
     write_count(next);
     next
 }
+
+pub fn special_effects() {
+    todo!(
+        "add special effects like showing the 67 kid when the number is 67 or playing whats 9
+        + 10 audio etc."
+    )
+}
