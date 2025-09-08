@@ -6,5 +6,6 @@ features:
 
 - automatic markdown compiler (sadly doesn't insert compiled html into /blog/index.html automatically... YET)
 - a counter (that has effects when you reach special numbers)
-- a website  
-  final number that does a special effect: 69
+- a website
+
+final number that does a special effect: 69
