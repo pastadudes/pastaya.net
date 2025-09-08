@@ -1,0 +1,15 @@
+{
+  "name": "counterrs",
+  "type": "module",
+  "version": "1.0.0-rc1",
+  "files": [
+    "counterrs_bg.wasm",
+    "counterrs.js",
+    "counterrs.d.ts"
+  ],
+  "main": "counterrs.js",
+  "types": "counterrs.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

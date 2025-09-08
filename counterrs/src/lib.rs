@@ -16,6 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+//! counterrs is a replacement for the old Javascript based counter  
+//! It extends on the base of the original counter adding:  
+//! 1: An anticheat (technically)  
+//! 2: Special effects for certain numbers: (plays vine boom at 69 for example)  
+//! 3: Faster and type safe.  
 // HEY! special_effects() is a STUB!! PLEASE HELP EXPAND IT!
 
 // my goal is for this to ACTUALLY be a good clicker game
@@ -23,7 +28,6 @@ use std::cell::Cell;
 use wasm_bindgen::prelude::*;
 use web_sys::{HtmlImageElement, window};
 
-// ---------- Clippy-clean thread-local counter ----------
 #[warn(clippy::missing_const_for_thread_local)]
 thread_local! {
     static COUNTER: Cell<u32> = Cell::new(0);
@@ -34,6 +38,7 @@ fn storage() -> web_sys::Storage {
     window().unwrap().local_storage().unwrap().unwrap()
 }
 
+// This function returns how many times a person has clicked the "nyabtn" in pastaya.net
 fn read_count_from_storage() -> u32 {
     storage()
         .get_item("clickCounter")
@@ -91,6 +96,7 @@ pub fn special_effects(count: u32) {
     }
 }
 
+/// This function basically shows the 67 kid image when called
 #[wasm_bindgen]
 pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
     let document = window().unwrap().document().expect("document required");
