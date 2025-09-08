@@ -54,8 +54,8 @@
     </p>
 
     <div id="button">
-      <p id="counterElement">nya!: <span id="counterNum">0</span></p>
-      <button type="button" id="nyabtn" onclick="incrementCounter()">
+      <p id="counterElement">nya!: <span id="counter">0</span></p>
+      <button type="button" id="nyabtn" onclick="increment_counter()">
         nya!
       </button>
     </div>
@@ -69,33 +69,27 @@
       <p id="credits">dark mode and other things by sobakintech</p>
     </footer>
 
-    <script>
-      function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-        const expires = "expires=" + date.toUTCString();
-        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    <script type="module">
+      import init, {
+        increment_counter,
+        init_counter,
+      } from "./counterrs/pkg/counterrs.js";
+
+      async function main() {
+        await init();
+
+        const button = document.getElementById("nyabtn");
+        const counter = document.getElementById("counter");
+
+        counter.textContent = init_counter();
+
+        // increment on click (hopefully)
+        button.addEventListener("click", () => {
+          counter.textContent = increment_counter();
+        });
       }
-      function getCookie(name) {
-        const decodedCookie = decodeURIComponent(document.cookie);
-        const cookieArr = decodedCookie.split(";");
-        for (let i = 0; i < cookieArr.length; i++) {
-          let cookiePair = cookieArr[i].trim();
-          if (cookiePair.startsWith(name + "=")) {
-            return cookiePair.split("=")[1];
-          }
-        }
-        return "";
-      }
-      let counter = parseInt(getCookie("clickCounter")) || 0;
-      console.log("nya button count retrieved", counter);
-      console.log("this is a local thing alr, im too lazy to make this global");
-      document.getElementById("counterNum").textContent = counter;
-      function incrementCounter() {
-        counter++;
-        document.getElementById("counterNum").textContent = counter;
-        setCookie("clickCounter", counter, 7);
-      }
+
+      main();
     </script>
   </body>
 </html>
