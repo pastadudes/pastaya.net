@@ -212,7 +212,7 @@ export function bootstrap_67_kid_image() {
 /**
  * This function is only meant for testing purposes, however I have no objections to anyone that
  * tries this
- * DOES NOT WRITE TO STORAGE!!!
+ * DOES WRITE TO STORAGE!!!
  * @param {number} v
  */
 export function set_counter(v) {

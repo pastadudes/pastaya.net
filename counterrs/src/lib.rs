@@ -121,7 +121,7 @@ pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
 
 /// This function is only meant for testing purposes, however I have no objections to anyone that
 /// tries this
-/// DOES NOT WRITE TO STORAGE!!!
+/// DOES WRITE TO STORAGE!!!
 #[wasm_bindgen]
 pub fn set_counter(v: u32) {
     COUNTER.with(|c| c.set(v));
