@@ -1,5 +1,5 @@
 /*
- * ;ib.rs - a replacement for a button counter
+ * lib.rs - a replacement for a button counter
  * Copyright (C) 2025 pastaya
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,16 +17,24 @@
  */
 
 // HEY! special_effects() is a STUB!! PLEASE HELP EXPAND IT!
+
+// my goal is for this to ACTUALLY be a good clicker game
+use std::cell::Cell;
 use wasm_bindgen::prelude::*;
-use web_sys::{Storage, console, window};
+use web_sys::{HtmlImageElement, window};
 
-// setup local storage instead of cookies
+// ---------- Clippy-clean thread-local counter ----------
+#[warn(clippy::missing_const_for_thread_local)]
+thread_local! {
+    static COUNTER: Cell<u32> = Cell::new(0);
+}
 
-fn storage() -> Storage {
+// we use local storage instead of cookies since cookies have a shitton of limits
+fn storage() -> web_sys::Storage {
     window().unwrap().local_storage().unwrap().unwrap()
 }
 
-fn read_count() -> u32 {
+fn read_count_from_storage() -> u32 {
     storage()
         .get_item("clickCounter")
         .ok()
@@ -35,32 +43,66 @@ fn read_count() -> u32 {
         .unwrap_or(0)
 }
 
-fn write_count(v: u32) {
+fn write_count_to_storage(v: u32) {
     let _ = storage().set_item("clickCounter", &v.to_string());
 }
 
 #[wasm_bindgen]
 pub fn init_counter() -> u32 {
-    read_count()
+    let val = read_count_from_storage();
+    COUNTER.with(|c| c.set(val));
+    val
 }
 
 #[wasm_bindgen]
 pub fn increment_counter() -> u32 {
-    let next = read_count().saturating_add(1);
-    write_count(next);
-    special_effects();
-    next
+    COUNTER.with(|c| {
+        let next = c.get().saturating_add(1);
+        c.set(next);
+        write_count_to_storage(next);
+        special_effects(next);
+        next
+    })
+}
+
+pub fn special_effects(count: u32) {
+    let audio_21 = web_sys::HtmlAudioElement::new_with_src(
+        "https://www.myinstants.com/media/sounds/whats-9-plus-10_i5PRvD4.mp3",
+    )
+    .unwrap();
+
+    let audio_69 = web_sys::HtmlAudioElement::new_with_src(
+        "https://www.myinstants.com/media/sounds/vine-boom.mp3",
+    )
+    .unwrap();
+
+    match count {
+        21 => {
+            let _ = audio_21.play();
+        }
+        // TODO: make the image disappear after 10 seconds and add a sound effect
+        67 => {
+            let _ = bootstrap_67_kid_image();
+        }
+        69 => {
+            let _ = audio_69.play();
+        }
+        _ => {}
+    }
 }
 
 #[wasm_bindgen]
-pub fn special_effects() {
-    let count = read_count(); // debating if i should've made it a reference
+pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
+    let document = window().unwrap().document().expect("document required");
 
-    match count {
-        21 => console::log_1(&"ay man whats 9 + 10?? 21. u stupid".into()),
-        67 => console::log_1(&"HOW MANY LETTERS IN MANGO AND IN MUSTARD??? 6 7".into()),
-        _ => {} // how am i supposed to do nothing???
+    let img = document
+        .create_element("img")?
+        .dyn_into::<HtmlImageElement>()?;
 
-                // TODO: make these ACTUALLY change DOM and play sound effects
-    }
+    img.set_src("https://i.kym-cdn.com/photos/images/newsfeed/003/128/463/b28");
+    img.set_alt("the 67 kid with the blue lasers coming out of his eyes");
+
+    document.body().unwrap().append_child(&img)?;
+
+    Ok(())
 }

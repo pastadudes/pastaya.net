@@ -81,8 +81,14 @@
 
         counter.textContent = init_counter();
 
+        let lastClick = 0;
+
         // increment on click (hopefully)
         button.addEventListener("click", () => {
+          const now = Date.now();
+          if (now - lastClick < 200) return; // HACK: very hacky way of "anticheat" and "debounce prevention"
+          lastClick = now;
+
           counter.textContent = increment_counter();
         });
       }
