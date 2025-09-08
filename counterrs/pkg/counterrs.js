@@ -199,7 +199,9 @@ function takeFromExternrefTable0(idx) {
     wasm.__externref_table_dealloc(idx);
     return value;
 }
-
+/**
+ * This function basically shows the 67 kid image when called
+ */
 export function bootstrap_67_kid_image() {
     const ret = wasm.bootstrap_67_kid_image();
     if (ret[1]) {
@@ -316,6 +318,9 @@ function __wbg_get_imports() {
     };
     imports.wbg.__wbg_setsrc_821f0f6962c54f10 = function(arg0, arg1, arg2) {
         arg0.src = getStringFromWasm0(arg1, arg2);
+    };
+    imports.wbg.__wbg_setsrcset_9515c4695d1c0baf = function(arg0, arg1, arg2) {
+        arg0.srcset = getStringFromWasm0(arg1, arg2);
     };
     imports.wbg.__wbg_static_accessor_GLOBAL_487c52c58d65314d = function() {
         const ret = typeof global === 'undefined' ? null : global;

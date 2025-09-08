@@ -111,8 +111,25 @@ pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
 
     img.set_src("https://i.kym-cdn.com/photos/images/newsfeed/003/128/463/b28");
     img.set_alt("the 67 kid with the blue lasers coming out of his eyes");
+    img.set_srcset("0.5x");
+    // TODO: Set correct width and height for 67 kid image (so its smaller)
 
     document.body().unwrap().append_child(&img)?;
 
-    Ok(())
+    Ok(()) // 👍
+}
+
+/// This function is only meant for testing purposes, however I have no objections to anyone that
+/// tries this
+/// DOES NOT WRITE TO STORAGE!!!
+pub fn set_counter(v: u32) {
+    COUNTER.with(|c| c.set(v));
+    write_count_to_storage(v);
+    special_effects(v);
+}
+
+/// Resets the counter. Pretty self explantory
+pub fn reset_counter() {
+    COUNTER.with(|c| c.set(0));
+    write_count_to_storage(0);
 }

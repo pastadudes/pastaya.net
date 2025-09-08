@@ -2,6 +2,9 @@
 /* eslint-disable */
 export function init_counter(): number;
 export function increment_counter(): number;
+/**
+ * This function basically shows the 67 kid image when called
+ */
 export function bootstrap_67_kid_image(): void;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
