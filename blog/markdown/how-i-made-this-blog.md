@@ -1,3 +1,21 @@
+# How I made this blog
+
+I had this idea for a nice simple markdown based blog that WASN'T
+
+1. too complex
+2. ~~bad~~ code (well if you ask anyone good at rust it would be bad)
+3. CLIENT SIDE MARKDOWN (bad SEO which is literally what I NEED right now)
+
+So I searched through existing solutions and they ALL were either
+
+1. not so simple
+2. way too complex to setup
+3. kinda BLOATED
+
+I gave up and just realized I could make my own. And I'll do it in Rust (cuz that's the only language I know lol)  
+using a "few" dependencies I cooked up this short program (also syntax highlighting test)
+
+```rust
 /*
  * main.rs - a program that compiles markdown in ../markdown/ into html stored under ../compiled/
  * Copyright (C) 2025 pastaya
@@ -58,15 +76,9 @@ fn compile_md_to_html(path: &Path, config: &CompilerConfig) -> Result<()> {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <title>{title}</title>
-
     <link rel="stylesheet" href="/blog/style.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/default.min.css">
-
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     <!-- highlight.js provides syntax highlighting -->
 </head>
@@ -117,3 +129,34 @@ fn main() -> Result<()> {
 
     loop {} // idk how to keep apps alive lol
 }
+```
+
+basically all it does is just
+
+1. watches the markdown/ folder
+2. if there are any changes in the markdown folder (new file, modifed, etc) then
+3. compiles markdown into html (and adds extra boilerplate for stuff like css, title (and in the future embed support))
+
+it took alot of time actually
+
+## The Problems I encountered
+
+At first I used the `markdown` crate from crates.io because it was the most simple one (it was but at a cost)  
+I could've just left it at there BUT I wanted syntax highlighting.  
+"why can't you use syntax highlighting and the markdown crate??"  
+the markdown crate produces THIS in a code block
+
+> `<p>example example<code>print("hello")</code>`
+
+HOWEVER
+highlight.js wants THIS
+
+> `<pre><code>print("hello")</code></pre>`
+
+tried my best to explain it but  
+markdown can ONLY make inline code unlike pulldown_cmark which produces the output highlight.js needs  
+anyways that uh ends my opening blog post
+
+cya!
+
+-- pastaya.
