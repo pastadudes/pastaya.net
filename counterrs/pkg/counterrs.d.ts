@@ -6,6 +6,16 @@ export function increment_counter(): number;
  * This function basically shows the 67 kid image when called
  */
 export function bootstrap_67_kid_image(): void;
+/**
+ * This function is only meant for testing purposes, however I have no objections to anyone that
+ * tries this
+ * DOES NOT WRITE TO STORAGE!!!
+ */
+export function set_counter(v: number): void;
+/**
+ * Resets the counter. Pretty self explantory
+ */
+export function reset_counter(): void;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
@@ -14,6 +24,8 @@ export interface InitOutput {
   readonly init_counter: () => number;
   readonly increment_counter: () => number;
   readonly bootstrap_67_kid_image: () => [number, number];
+  readonly set_counter: (a: number) => void;
+  readonly reset_counter: () => void;
   readonly __wbindgen_exn_store: (a: number) => void;
   readonly __externref_table_alloc: () => number;
   readonly __wbindgen_export_2: WebAssembly.Table;

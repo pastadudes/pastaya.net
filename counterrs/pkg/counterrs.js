@@ -209,6 +209,23 @@ export function bootstrap_67_kid_image() {
     }
 }
 
+/**
+ * This function is only meant for testing purposes, however I have no objections to anyone that
+ * tries this
+ * DOES NOT WRITE TO STORAGE!!!
+ * @param {number} v
+ */
+export function set_counter(v) {
+    wasm.set_counter(v);
+}
+
+/**
+ * Resets the counter. Pretty self explantory
+ */
+export function reset_counter() {
+    wasm.reset_counter();
+}
+
 const EXPECTED_RESPONSE_TYPES = new Set(['basic', 'cors', 'default']);
 
 async function __wbg_load(module, imports) {

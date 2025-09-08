@@ -122,6 +122,7 @@ pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
 /// This function is only meant for testing purposes, however I have no objections to anyone that
 /// tries this
 /// DOES NOT WRITE TO STORAGE!!!
+#[wasm_bindgen]
 pub fn set_counter(v: u32) {
     COUNTER.with(|c| c.set(v));
     write_count_to_storage(v);
@@ -129,6 +130,7 @@ pub fn set_counter(v: u32) {
 }
 
 /// Resets the counter. Pretty self explantory
+#[wasm_bindgen]
 pub fn reset_counter() {
     COUNTER.with(|c| c.set(0));
     write_count_to_storage(0);
