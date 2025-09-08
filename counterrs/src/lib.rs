@@ -21,6 +21,10 @@
 //! 1: An anticheat (technically)  
 //! 2: Special effects for certain numbers: (plays vine boom at 69 for example)  
 //! 3: Faster and type safe.  
+//! Of course it has drawbacks, namely that old browsers (around internet explorer age) can't  
+//! run it  
+//! It also isn't a complete 1:1 version of the old counter because of how it uses local_storage  
+//! instead of cookies
 // HEY! special_effects() is a STUB!! PLEASE HELP EXPAND IT!
 
 // my goal is for this to ACTUALLY be a good clicker game
