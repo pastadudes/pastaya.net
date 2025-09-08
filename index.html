@@ -63,6 +63,8 @@
       interested? lets <a href="nix/">talk.</a>
     </p>
 
+    <p>something broken? file an issue at the github repo</p>
+
     <footer>
       <p id="credits">dark mode and other things by sobakintech</p>
     </footer>
@@ -86,7 +88,7 @@
         // increment on click (hopefully)
         button.addEventListener("click", () => {
           const now = Date.now();
-          if (now - lastClick < 200) return; // HACK: very hacky way of "anticheat" and "debounce prevention"
+          if (now - lastClick < 100) return; // HACK: very hacky way of "anticheat" and "debounce prevention"
           lastClick = now;
 
           counter.textContent = increment_counter();
