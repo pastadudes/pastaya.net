@@ -14,6 +14,7 @@ export function bootstrap_67_kid_image(): void;
 export function set_counter(v: number): void;
 /**
  * Resets the counter. Pretty self explantory
+ * Probably considered the same as "set_counter(0)"
  */
 export function reset_counter(): void;
 

@@ -84,6 +84,10 @@ pub fn special_effects(count: u32) {
         "https://www.myinstants.com/media/sounds/vine-boom.mp3",
     )
     .unwrap();
+    let audio_67 = web_sys::HtmlAudioElement::new_with_src(
+        "https://www.myinstants.com//media/sounds/67_SQlv2Xv.mp3",
+    )
+    .unwrap();
 
     match count {
         21 => {
@@ -92,6 +96,7 @@ pub fn special_effects(count: u32) {
         // TODO: make the image disappear after 10 seconds and add a sound effect
         67 => {
             let _ = bootstrap_67_kid_image();
+            let _ = audio_67.play();
         }
         69 => {
             let _ = audio_69.play();
@@ -111,10 +116,11 @@ pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
 
     img.set_src("https://i.kym-cdn.com/photos/images/newsfeed/003/128/463/b28");
     img.set_alt("the 67 kid with the blue lasers coming out of his eyes");
-    img.set_srcset("0.5x");
+    // img.set_class_name("half");
     // TODO: Set correct width and height for 67 kid image (so its smaller)
 
     document.body().unwrap().append_child(&img)?;
+    // TODO: make it so that it disappears after about 10 seconds
 
     Ok(()) // 👍
 }
@@ -130,6 +136,7 @@ pub fn set_counter(v: u32) {
 }
 
 /// Resets the counter. Pretty self explantory
+/// Probably considered the same as "set_counter(0)"
 #[wasm_bindgen]
 pub fn reset_counter() {
     COUNTER.with(|c| c.set(0));

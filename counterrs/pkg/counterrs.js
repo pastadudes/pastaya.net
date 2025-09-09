@@ -221,6 +221,7 @@ export function set_counter(v) {
 
 /**
  * Resets the counter. Pretty self explantory
+ * Probably considered the same as "set_counter(0)"
  */
 export function reset_counter() {
     wasm.reset_counter();
@@ -333,11 +334,11 @@ function __wbg_get_imports() {
     imports.wbg.__wbg_setalt_1fdae8bfeb377ab8 = function(arg0, arg1, arg2) {
         arg0.alt = getStringFromWasm0(arg1, arg2);
     };
+    imports.wbg.__wbg_setclassName_13c484e4026db6a8 = function(arg0, arg1, arg2) {
+        arg0.className = getStringFromWasm0(arg1, arg2);
+    };
     imports.wbg.__wbg_setsrc_821f0f6962c54f10 = function(arg0, arg1, arg2) {
         arg0.src = getStringFromWasm0(arg1, arg2);
-    };
-    imports.wbg.__wbg_setsrcset_9515c4695d1c0baf = function(arg0, arg1, arg2) {
-        arg0.srcset = getStringFromWasm0(arg1, arg2);
     };
     imports.wbg.__wbg_static_accessor_GLOBAL_487c52c58d65314d = function() {
         const ret = typeof global === 'undefined' ? null : global;
