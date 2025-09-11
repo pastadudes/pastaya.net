@@ -131,7 +131,7 @@ header {
 
 @font-face {
   font-family: "Big Blue Terminal 437 Nerd Font";
-  font-display: fallback;
+  font-display: swap;
   src: url("./assets/fonts/BigBlueTerm437NerdFont-Regular.ttf")
     format("truetype");
 }
