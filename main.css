@@ -1,6 +1,6 @@
 /* 
  * main.css - the main css file used in pastaya.net
- * Copyright (C) 2025 SobakinTech
+ * Copyright (C) 2025 SobakinTech, pastaya
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,17 +16,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/* ::selection { */
+/*   background: #ff9a00; */
+/*   color: #000000; */
+/* } */
+/* the things up there is for future reference
 /* page bg */
 body {
   background-color: #212226;
 }
 
 /* all text */
+/* pastaya comments here, fuck you sobakintech for not including blockquote */
 p,
 h1,
 h2,
 h3,
 a,
+blockquote,
 button {
   color: white;
   font-family: Inter;
@@ -120,4 +127,13 @@ header {
   100% {
     transform: rotate(3.145926535deg);
   }
+}
+
+@font-face {
+  font-family: "Big Blue Terminal 437 Nerd Font";
+  src: url("./assets/fonts/BigBlueTerm437NerdFont-Regular.ttf")
+    format("truetype");
+}
+.bigblueterminated {
+  font-family: "Big Blue Terminal 437 Nerd Font", monospace;
 }
