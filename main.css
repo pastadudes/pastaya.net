@@ -86,3 +86,38 @@ header {
     background-color 0.3s ease,
     box-shadow 0.3s ease;
 }
+
+.angled-header {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.angled-header h1 {
+  display: inline-block;
+  transition: transform 0.4 ease-in-out;
+  transform: rotate(3.1415926535deg);
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: #ffaf00;
+  padding: 0.5rem 1rem;
+  animation: snapRotate 0.75s ease-in-out forwards;
+}
+
+@keyframes snapRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(3.145926535deg);
+  }
+  80% {
+    transform: rotate(2.005926535deg);
+  }
+  100% {
+    transform: rotate(3.145926535deg);
+  }
+}
