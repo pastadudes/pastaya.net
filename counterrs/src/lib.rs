@@ -20,7 +20,7 @@
 //! It extends on the base of the original counter adding:  
 //! 1: An anticheat (technically)  
 //! 2: Special effects for certain numbers: (plays vine boom at 69 for example)  
-//! 3: Faster and type safe.  
+//! 3: Faster and type safe. (it can also be rust propaganda)
 //! Of course it has drawbacks, namely that old browsers (around internet explorer age) can't  
 //! run it  
 //! It also isn't a complete 1:1 version of the old counter because of how it uses local_storage  
@@ -28,15 +28,14 @@
 // HEY! special_effects() is a STUB!! PLEASE HELP EXPAND IT!
 
 // my goal is for this to ACTUALLY be a good clicker game
+use gloo_timers::future::TimeoutFuture;
 use std::cell::Cell;
 use wasm_bindgen::prelude::*;
 use web_sys::{HtmlImageElement, window};
 
-#[warn(clippy::missing_const_for_thread_local)]
 thread_local! {
     static COUNTER: Cell<u32> = Cell::new(0);
 }
-
 // we use local storage instead of cookies since cookies have a shitton of limits
 fn storage() -> web_sys::Storage {
     window().unwrap().local_storage().unwrap().unwrap()
@@ -63,52 +62,85 @@ pub fn init_counter() -> u32 {
     val
 }
 
+// MORE OPTIMZATION!!!
+thread_local! {
+    static AUDIO_1_1: web_sys::HtmlAudioElement =
+        web_sys::HtmlAudioElement::new_with_src("/assets/audio/1.wav").unwrap();
+
+    static AUDIO_1_2: web_sys::HtmlAudioElement =
+        web_sys::HtmlAudioElement::new_with_src("/assets/audio/2.wav").unwrap();
+
+    static AUDIO_21: web_sys::HtmlAudioElement =
+        web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/whats-9-plus-10_i5PRvD4.mp3")
+            .unwrap();
+
+    static AUDIO_42: web_sys::HtmlAudioElement =
+        web_sys::HtmlAudioElement::new_with_src("/assets/audio/42.wav").unwrap();
+
+    static AUDIO_67: web_sys::HtmlAudioElement =
+        web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com//media/sounds/67_SQlv2Xv.mp3")
+            .unwrap();
+
+    static AUDIO_69: web_sys::HtmlAudioElement =
+        web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/vine-boom.mp3")
+            .unwrap();
+
+    static AUDIO_80085: web_sys::HtmlAudioElement =
+        web_sys::HtmlAudioElement::new_with_src("/assets/audio/80085.wav").unwrap();
+
+    static AUDIO_9000: web_sys::HtmlAudioElement =
+        web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/its_over_9000.mp3")
+            .unwrap();
+}
+
 #[wasm_bindgen]
 pub fn increment_counter() -> u32 {
     COUNTER.with(|c| {
         let next = c.get().saturating_add(1);
         c.set(next);
         write_count_to_storage(next);
-        special_effects(next);
+        // we actually don't want audio_nya to be in thread_local! because it doesn't stack
+        // (basically uhh im saying that it doesn't overlap with itself)
+        if let Ok(audio) = web_sys::HtmlAudioElement::new_with_src(
+            "https://www.myinstants.com/media/sounds/fnf-kapi-nyaw-sound-effect.mp3",
+        ) {
+            let _ = audio.play();
+        }
+        wasm_bindgen_futures::spawn_local(special_effects(next));
         next
     })
 }
 
-pub fn special_effects(count: u32) {
-    let audio_21 = web_sys::HtmlAudioElement::new_with_src(
-        "https://www.myinstants.com/media/sounds/whats-9-plus-10_i5PRvD4.mp3",
-    )
-    .unwrap();
-
-    let audio_69 = web_sys::HtmlAudioElement::new_with_src(
-        "https://www.myinstants.com/media/sounds/vine-boom.mp3",
-    )
-    .unwrap();
-    let audio_67 = web_sys::HtmlAudioElement::new_with_src(
-        "https://www.myinstants.com//media/sounds/67_SQlv2Xv.mp3",
-    )
-    .unwrap();
-    let audio_42 = web_sys::HtmlAudioElement::new_with_src("/assets/audio/42.wav").unwrap();
-    let audio_80085 = web_sys::HtmlAudioElement::new_with_src("/assets/audio/80085.wav").unwrap();
-
+pub async fn special_effects(count: u32) {
     match count {
-        21 => {
-            let _ = audio_21.play();
+        1 => {
+            AUDIO_1_1.with(|a| {
+                let _ = a.play();
+            });
+            TimeoutFuture::new(2000).await;
+            AUDIO_1_2.with(|a| {
+                let _ = a.play();
+            });
         }
-        42 => {
-            let _ = audio_42.play();
-        }
-        // TODO: make the image disappear after 10 seconds and add a sound effect
-        67 => {
+        21 => AUDIO_21.with(|a| {
+            let _ = a.play();
+        }),
+        42 => AUDIO_42.with(|a| {
+            let _ = a.play();
+        }),
+        67 => AUDIO_67.with(|a| {
+            let _ = a.play();
             let _ = bootstrap_67_kid_image();
-            let _ = audio_67.play();
-        }
-        69 => {
-            let _ = audio_69.play();
-        }
-        80085 => {
-            let _ = audio_80085.play();
-        }
+        }),
+        69 => AUDIO_69.with(|a| {
+            let _ = a.play();
+        }),
+        80085 => AUDIO_80085.with(|a| {
+            let _ = a.play();
+        }),
+        9000 => AUDIO_9000.with(|a| {
+            let _ = a.play();
+        }),
         _ => {}
     }
 }
@@ -128,7 +160,12 @@ pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
     // TODO: Set correct width and height for 67 kid image (so its smaller)
 
     document.body().unwrap().append_child(&img)?;
-    // TODO: make it so that it disappears after about 10 seconds
+    let img_clone = img.clone();
+    wasm_bindgen_futures::spawn_local(async move {
+        TimeoutFuture::new(10000).await;
+        #[allow(clippy::let_unit_value)]
+        let _ = img_clone.remove();
+    });
 
     Ok(()) // 👍
 }
@@ -140,7 +177,7 @@ pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
 pub fn set_counter(v: u32) {
     COUNTER.with(|c| c.set(v));
     write_count_to_storage(v);
-    special_effects(v);
+    wasm_bindgen_futures::spawn_local(special_effects(v));
 }
 
 /// Resets the counter. Pretty self explantory
