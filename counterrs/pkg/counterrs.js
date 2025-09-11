@@ -334,9 +334,6 @@ function __wbg_get_imports() {
     imports.wbg.__wbg_setalt_1fdae8bfeb377ab8 = function(arg0, arg1, arg2) {
         arg0.alt = getStringFromWasm0(arg1, arg2);
     };
-    imports.wbg.__wbg_setclassName_13c484e4026db6a8 = function(arg0, arg1, arg2) {
-        arg0.className = getStringFromWasm0(arg1, arg2);
-    };
     imports.wbg.__wbg_setsrc_821f0f6962c54f10 = function(arg0, arg1, arg2) {
         arg0.src = getStringFromWasm0(arg1, arg2);
     };

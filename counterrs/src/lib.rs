@@ -88,10 +88,15 @@ pub fn special_effects(count: u32) {
         "https://www.myinstants.com//media/sounds/67_SQlv2Xv.mp3",
     )
     .unwrap();
+    let audio_42 = web_sys::HtmlAudioElement::new_with_src("/assets/audio/42.wav").unwrap();
+    let audio_80085 = web_sys::HtmlAudioElement::new_with_src("/assets/audio/80085.wav").unwrap();
 
     match count {
         21 => {
             let _ = audio_21.play();
+        }
+        42 => {
+            let _ = audio_42.play();
         }
         // TODO: make the image disappear after 10 seconds and add a sound effect
         67 => {
@@ -100,6 +105,9 @@ pub fn special_effects(count: u32) {
         }
         69 => {
             let _ = audio_69.play();
+        }
+        80085 => {
+            let _ = audio_80085.play();
         }
         _ => {}
     }
