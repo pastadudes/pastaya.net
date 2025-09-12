@@ -226,6 +226,7 @@ pub async fn special_effects(count: u32) {
 ///         None, // We don't use a class
 ///    );
 /// ```
+/// WE HAVE TO USE .to_string() BECAUSE THE FUNCTION ONLY WANTS A Option<String>!
 
 #[wasm_bindgen]
 pub fn bootstrap_image(
