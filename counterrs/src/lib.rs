@@ -79,10 +79,10 @@ pub fn init_counter() -> u32 {
 // MORE OPTIMZATION!!!
 thread_local! {
     static AUDIO_1_1: web_sys::HtmlAudioElement =
-        web_sys::HtmlAudioElement::new_with_src("/assets/audio/1.wav").unwrap();
+        web_sys::HtmlAudioElement::new_with_src("/assets/audio/1-part1.wav").unwrap();
 
     static AUDIO_1_2: web_sys::HtmlAudioElement =
-        web_sys::HtmlAudioElement::new_with_src("/assets/audio/2.wav").unwrap();
+        web_sys::HtmlAudioElement::new_with_src("/assets/audio/1-part2.wav").unwrap();
 
     static AUDIO_21: web_sys::HtmlAudioElement =
         web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/whats-9-plus-10_i5PRvD4.mp3")
