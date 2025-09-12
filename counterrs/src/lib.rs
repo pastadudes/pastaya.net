@@ -193,16 +193,17 @@ pub async fn special_effects(count: u32) {
             let _ = a.play();
         }),
         777 => {
-            // TODO: reverse the order and make the audio play after slot machine has 3 7's
-            AUDIO_777.with(|a| {
-                let _ = a.play();
-            });
             let _ = bootstrap_image(
                 "https://media1.tenor.com/m/WUWygJ0Fwz8AAAAd/jago33-slot-machine.gif",
                 Some("slot machine go BRRRRRRRRRRRR".to_string()),
                 6000,
                 Some("slotmachine".to_string()),
             );
+
+            // TODO: reverse the order and make the audio play after slot machine has 3 7's
+            AUDIO_777.with(|a| {
+                let _ = a.play();
+            });
         }
         9000 => AUDIO_9000.with(|a| {
             let _ = a.play();
