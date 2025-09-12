@@ -22,6 +22,7 @@
 /* } */
 /* the things up there is for future reference
 /* page bg */
+/* Enter Sobakin. */
 body {
   background-color: #212226;
 }
@@ -93,6 +94,7 @@ header {
     background-color 0.3s ease,
     box-shadow 0.3s ease;
 }
+/* End Sobakin */
 
 .angled-header {
   margin-top: 3rem;
@@ -140,6 +142,12 @@ header {
 
 .half {
   transform: scale(0.5);
+  transform-origin: top left;
+  display: inline-block;
+}
+
+.slotmachine {
+  transform: scale(0.2);
   transform-origin: top left;
   display: inline-block;
 }

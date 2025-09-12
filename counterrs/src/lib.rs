@@ -201,7 +201,7 @@ pub async fn special_effects(count: u32) {
                 "https://media1.tenor.com/m/WUWygJ0Fwz8AAAAd/jago33-slot-machine.gif",
                 Some("slot machine go BRRRRRRRRRRRR".to_string()),
                 6000,
-                None,
+                Some("slotmachine".to_string()),
             );
         }
         9000 => AUDIO_9000.with(|a| {
