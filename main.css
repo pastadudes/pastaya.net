@@ -70,6 +70,7 @@ a:hover {
   background-color: none;
   color: white;
   padding: 10px;
+  animation: snapRotate 0.75s ease-in-out forwards;
 }
 
 header {
