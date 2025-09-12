@@ -152,3 +152,38 @@ header {
   transform-origin: top left;
   display: inline-block;
 }
+
+@media (max-width: 768px) {
+  .angled-header {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .angled-header h1 {
+    font-size: 1.8rem;
+
+    line-height: 1.4;
+    hyphens: auto; /* let that shi have hyphens */
+  }
+
+  #links {
+    /* puts it at the top of the site and below the logo */
+    position: relative;
+
+    animation: none;
+
+    text-align: center;
+    width: 100%;
+    /* padding: 10px 0;  */
+  }
+
+  /* #links > a { */
+  /*   margin: 5px; */
+  /* } */
+  #logo {
+    /* yo cuh i heard people center logos on mobile */
+    display: block;
+    margin: 0 auto;
+    padding-top: 10px;
+  }
+}
