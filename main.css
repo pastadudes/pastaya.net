@@ -137,3 +137,9 @@ header {
 .bigblueterminated {
   font-family: "Big Blue Terminal 437 Nerd Font", monospace;
 }
+
+.half {
+  transform: scale(0.5);
+  transform-origin: top left;
+  display: inline-block;
+}

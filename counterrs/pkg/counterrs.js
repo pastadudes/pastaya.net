@@ -210,6 +210,20 @@ function debugString(val) {
     return className;
 }
 /**
+ * Sets IS_PAUSED to true.
+ */
+export function pause_counter() {
+    wasm.pause_counter();
+}
+
+/**
+ * Sets IS_PAUSED to false.
+ */
+export function resume_counter() {
+    wasm.resume_counter();
+}
+
+/**
  * @returns {number}
  */
 export function init_counter() {
@@ -218,6 +232,9 @@ export function init_counter() {
 }
 
 /**
+ * Increments the counter.
+ * It also checks if IS_PAUSED is true or not.
+ * If IS_PAUSED is true then it doesn't increment, pretty simple
  * @returns {number}
  */
 export function increment_counter() {
@@ -231,10 +248,29 @@ function takeFromExternrefTable0(idx) {
     return value;
 }
 /**
- * This function basically shows the 67 kid image when called
+ * This function bootstraps an image and puts it in the DOM
+ * Examples:
+ * ```rust
+ * let _ = bootstrap_image(
+ *     "https://media1.tenor.com/m/WUWygJ0Fwz8AAAAd/jago33-slot-machine.gif", // This is what image to display
+ *         Some("slot machine go BRRRRRRRRRRRR".to_string()), // Alt
+ *         6000, // Duration in milliseconds
+ *         None, // We don't use a class
+ *    );
+ * ```
+ * @param {string} src
+ * @param {string | null | undefined} alt
+ * @param {number} duration
+ * @param {string | null} [_class]
  */
-export function bootstrap_67_kid_image() {
-    const ret = wasm.bootstrap_67_kid_image();
+export function bootstrap_image(src, alt, duration, _class) {
+    const ptr0 = passStringToWasm0(src, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    var ptr1 = isLikeNone(alt) ? 0 : passStringToWasm0(alt, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    var len1 = WASM_VECTOR_LEN;
+    var ptr2 = isLikeNone(_class) ? 0 : passStringToWasm0(_class, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    var len2 = WASM_VECTOR_LEN;
+    const ret = wasm.bootstrap_image(ptr0, len0, ptr1, len1, duration, ptr2, len2);
     if (ret[1]) {
         throw takeFromExternrefTable0(ret[0]);
     }
@@ -259,7 +295,7 @@ export function reset_counter() {
 }
 
 function __wbg_adapter_18(arg0, arg1, arg2) {
-    wasm.closure10_externref_shim(arg0, arg1, arg2);
+    wasm.closure13_externref_shim(arg0, arg1, arg2);
 }
 
 function __wbg_adapter_21(arg0, arg1) {
@@ -395,6 +431,9 @@ function __wbg_get_imports() {
     imports.wbg.__wbg_setalt_1fdae8bfeb377ab8 = function(arg0, arg1, arg2) {
         arg0.alt = getStringFromWasm0(arg1, arg2);
     };
+    imports.wbg.__wbg_setclassName_13c484e4026db6a8 = function(arg0, arg1, arg2) {
+        arg0.className = getStringFromWasm0(arg1, arg2);
+    };
     imports.wbg.__wbg_setsrc_821f0f6962c54f10 = function(arg0, arg1, arg2) {
         arg0.src = getStringFromWasm0(arg1, arg2);
     };
@@ -427,12 +466,12 @@ function __wbg_get_imports() {
         const ret = false;
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper309 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 20, __wbg_adapter_21);
+    imports.wbg.__wbindgen_closure_wrapper320 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 23, __wbg_adapter_21);
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper68 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 9, __wbg_adapter_18);
+    imports.wbg.__wbindgen_closure_wrapper78 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 12, __wbg_adapter_18);
         return ret;
     };
     imports.wbg.__wbindgen_debug_string = function(arg0, arg1) {

@@ -35,7 +35,21 @@ use web_sys::{HtmlImageElement, window};
 
 thread_local! {
     static COUNTER: Cell<u32> = Cell::new(0);
+    static IS_PAUSED: Cell<bool> = Cell::new(false); // for future reference...
 }
+#[wasm_bindgen]
+/// Sets IS_PAUSED to true.
+pub fn pause_counter() {
+    IS_PAUSED.with(|p| p.set(true));
+}
+
+// Function to resume the counter (start incrementing and writing to storage again)
+#[wasm_bindgen]
+/// Sets IS_PAUSED to false.
+pub fn resume_counter() {
+    IS_PAUSED.with(|p| p.set(false));
+}
+
 // we use local storage instead of cookies since cookies have a shitton of limits
 fn storage() -> web_sys::Storage {
     window().unwrap().local_storage().unwrap().unwrap()
@@ -85,16 +99,36 @@ thread_local! {
         web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/vine-boom.mp3")
             .unwrap();
 
+    static AUDIO_420: web_sys::HtmlAudioElement =
+    web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/im-on-that-good-kush-high-quality.mp3")
+        .unwrap();
+
+    static AUDIO_666: web_sys::HtmlAudioElement =
+    web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/susto-666.mp3")
+        .unwrap();
+
+    static AUDIO_777: web_sys::HtmlAudioElement =
+    web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/slotmachine.mp3")
+        .unwrap();
+
+    static AUDIO_9000: web_sys::HtmlAudioElement =
+    web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/its_over_9000.mp3")
+        .unwrap();
+
     static AUDIO_80085: web_sys::HtmlAudioElement =
         web_sys::HtmlAudioElement::new_with_src("/assets/audio/80085.wav").unwrap();
 
-    static AUDIO_9000: web_sys::HtmlAudioElement =
-        web_sys::HtmlAudioElement::new_with_src("https://www.myinstants.com/media/sounds/its_over_9000.mp3")
-            .unwrap();
+
 }
 
 #[wasm_bindgen]
+/// Increments the counter.  
+/// It also checks if IS_PAUSED is true or not.  
+/// If IS_PAUSED is true then it doesn't increment, pretty simple
 pub fn increment_counter() -> u32 {
+    if IS_PAUSED.with(|p| p.get()) {
+        return COUNTER.with(|c| c.get()); // Don't increment if paused
+    }
     COUNTER.with(|c| {
         let next = c.get().saturating_add(1);
         c.set(next);
@@ -111,6 +145,16 @@ pub fn increment_counter() -> u32 {
     })
 }
 
+/// Plays a set of special effects on a certain "number"  
+/// All numbers that have a special effect:  
+/// 1. 1
+/// 2. 21
+/// 3. 42
+/// 4. 67
+/// 5. 69
+/// 6. 420
+/// 7. 666
+/// 8. 777
 pub async fn special_effects(count: u32) {
     match count {
         1 => {
@@ -128,41 +172,94 @@ pub async fn special_effects(count: u32) {
         42 => AUDIO_42.with(|a| {
             let _ = a.play();
         }),
-        67 => AUDIO_67.with(|a| {
-            let _ = a.play();
-            let _ = bootstrap_67_kid_image();
-        }),
+        67 => {
+            AUDIO_67.with(|a| {
+                let _ = a.play();
+            });
+            let _ = bootstrap_image(
+                "https://i.kym-cdn.com/photos/images/newsfeed/003/128/463/b28",
+                Some("the 67 kid with the blue lasers coming out of his eyes".to_string()),
+                3000,
+                Some("half".to_string()),
+            );
+        }
         69 => AUDIO_69.with(|a| {
+            let _ = a.play();
+        }),
+        420 => AUDIO_420.with(|a| {
+            let _ = a.play();
+        }),
+        666 => AUDIO_666.with(|a| {
+            let _ = a.play();
+        }),
+        777 => {
+            // TODO: reverse the order and make the audio play after slot machine has 3 7's
+            AUDIO_777.with(|a| {
+                let _ = a.play();
+            });
+            let _ = bootstrap_image(
+                "https://media1.tenor.com/m/WUWygJ0Fwz8AAAAd/jago33-slot-machine.gif",
+                Some("slot machine go BRRRRRRRRRRRR".to_string()),
+                6000,
+                None,
+            );
+        }
+        9000 => AUDIO_9000.with(|a| {
             let _ = a.play();
         }),
         80085 => AUDIO_80085.with(|a| {
             let _ = a.play();
         }),
-        9000 => AUDIO_9000.with(|a| {
-            let _ = a.play();
-        }),
+
         _ => {}
     }
 }
 
-/// This function basically shows the 67 kid image when called
+/// This function bootstraps an image and puts it in the DOM  
+/// Examples:  
+/// ```rust
+/// let _ = bootstrap_image(
+///     "https://media1.tenor.com/m/WUWygJ0Fwz8AAAAd/jago33-slot-machine.gif", // This is what image to display
+///         Some("slot machine go BRRRRRRRRRRRR".to_string()), // Alt
+///         6000, // Duration in milliseconds
+///         None, // We don't use a class
+///    );
+/// ```
+
 #[wasm_bindgen]
-pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
+pub fn bootstrap_image(
+    src: &str,
+    alt: Option<String>,
+    duration: u32,
+    class: Option<String>,
+) -> Result<(), JsValue> {
     let document = window().unwrap().document().expect("document required");
 
     let img = document
         .create_element("img")?
         .dyn_into::<HtmlImageElement>()?;
 
-    img.set_src("https://i.kym-cdn.com/photos/images/newsfeed/003/128/463/b28");
-    img.set_alt("the 67 kid with the blue lasers coming out of his eyes");
-    // img.set_class_name("half");
-    // TODO: Set correct width and height for 67 kid image (so its smaller)
+    img.set_src(src);
+    // match alt {
+    //     Some(a) => img.set_alt(&a),
+    //     None => {}
+    // }
+    // match class {
+    //     Some(c) => img.set_class_name(&c),
+    //     None => {}
+    // }
+    // don't mind me
+    if let Some(a) = alt {
+        img.set_alt(&a);
+    }
+    if let Some(c) = class {
+        img.set_class_name(&c);
+    }
 
     document.body().unwrap().append_child(&img)?;
     let img_clone = img.clone();
     wasm_bindgen_futures::spawn_local(async move {
-        TimeoutFuture::new(10000).await;
+        TimeoutFuture::new(duration).await;
         #[allow(clippy::let_unit_value)]
         let _ = img_clone.remove();
     });
@@ -170,8 +267,8 @@ pub fn bootstrap_67_kid_image() -> Result<(), JsValue> {
     Ok(()) // 👍
 }
 
-/// This function is only meant for testing purposes, however I have no objections to anyone that
-/// tries this
+/// This function is only meant for testing purposes, however I have no objections to anyone that  
+/// tries this  
 /// DOES WRITE TO STORAGE!!!
 #[wasm_bindgen]
 pub fn set_counter(v: u32) {
@@ -180,7 +277,7 @@ pub fn set_counter(v: u32) {
     wasm_bindgen_futures::spawn_local(special_effects(v));
 }
 
-/// Resets the counter. Pretty self explantory
+/// Resets the counter. Pretty self explantory  
 /// Probably considered the same as "set_counter(0)"
 #[wasm_bindgen]
 pub fn reset_counter() {
