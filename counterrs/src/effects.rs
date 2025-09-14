@@ -12,9 +12,11 @@ use crate::bootstrap_image;
 /// - 420
 /// - 666
 /// - 777
+/// - 12345
 /// - 9000
 /// - 80085
 pub async fn special_effects(count: u32) {
+    // WARN: this code is made in yandere dev style
     match count {
         1 => {
             AUDIO_1_1.with(|a| {
@@ -59,11 +61,13 @@ pub async fn special_effects(count: u32) {
                 Some("slotmachine".to_string()),
             );
 
-            // TODO: reverse the order and make the audio play after slot machine has 3 7's
             AUDIO_777.with(|a| {
                 let _ = a.play();
             });
         }
+        12345 => AUDIO_12345.with(|a| {
+            let _ = a.play();
+        }),
         9000 => AUDIO_9000.with(|a| {
             let _ = a.play();
         }),
