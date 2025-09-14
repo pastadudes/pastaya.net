@@ -65,6 +65,10 @@ pub async fn special_effects(count: u32) {
                 let _ = a.play();
             });
         }
+        1000 => AUDIO_1000.with(|a| {
+            let _ = a.play();
+            // TODO: add xbox gif at fixed bottom
+        }),
         12345 => AUDIO_12345.with(|a| {
             let _ = a.play();
         }),
