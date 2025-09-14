@@ -16,8 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-//! counterrs is a replacement for the old Javascript based counter  
-//! It extends on the base of the original counter adding:  
+//! # counterrs is a replacement for the old Javascript based counter  
+//! ## It extends on the base of the original counter adding:  
 //! 1: An anticheat (technically)  
 //! 2: Special effects for certain numbers: (plays vine boom at 69 for example)  
 //! 3: Faster and type safe. (it can also be rust propaganda)
@@ -35,6 +35,7 @@ mod audio;
 mod counter;
 mod effects;
 use crate::effects::special_effects;
+use wasm_bindgen_test::*;
 
 // we use local storage instead of cookies since cookies have a shitton of limits
 fn storage() -> web_sys::Storage {
@@ -65,7 +66,7 @@ fn write_count_to_storage(v: u32) {
 ///         None, // We don't use a class
 ///    );
 /// ```
-/// WE HAVE TO USE .to_string() BECAUSE THE FUNCTION ONLY WANTS A Option<String>!
+/// WE HAVE TO USE `.to_string()` BECAUSE THE FUNCTION ONLY WANTS A `Option<String>`!
 
 #[wasm_bindgen]
 pub fn bootstrap_image(
@@ -81,15 +82,7 @@ pub fn bootstrap_image(
         .dyn_into::<HtmlImageElement>()?;
 
     img.set_src(src);
-    // match alt {
-    //     Some(a) => img.set_alt(&a),
-    //     None => {}
-    // }
-    // match class {
-    //     Some(c) => img.set_class_name(&c),
-    //     None => {}
-    // }
-    // don't mind me
+
     if let Some(a) = alt {
         img.set_alt(&a);
     }
@@ -106,4 +99,54 @@ pub fn bootstrap_image(
     });
 
     Ok(()) // 👍
+}
+// unit tests start here
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+wasm_bindgen_test_configure!(run_in_browser);
+
+#[wasm_bindgen_test]
+#[allow(dead_code)]
+fn test_bootstrap_image_inserts_img() {
+    let _ = bootstrap_image(
+        "https://example.com/test.gif",
+        Some("alt text".to_string()),
+        1000,
+        Some("test-class".to_string()),
+    );
+
+    let document = window().unwrap().document().unwrap();
+    let body = document.body().unwrap();
+
+    // Enter image.
+    let img = body
+        .last_child()
+        .unwrap()
+        .dyn_into::<HtmlImageElement>()
+        .unwrap();
+
+    // is it good???
+    assert!(img.src().contains("https://example.com/test.gif"));
+    assert_eq!(img.alt(), "alt text");
+    assert_eq!(img.class_name(), "test-class");
+}
+
+#[wasm_bindgen_test(async)]
+#[allow(dead_code)]
+async fn test_bootstrap_image_removes_after_duration() {
+    let _ = bootstrap_image(
+        "https://example.com/test.gif",
+        None,
+        100, // only 0.1s cuz uhhhhhhhh
+        None,
+    );
+
+    let document = window().unwrap().document().unwrap();
+    let body = document.body().unwrap();
+
+    assert!(body.query_selector("img").unwrap().is_some());
+
+    gloo_timers::future::TimeoutFuture::new(200).await;
+
+    assert!(body.query_selector("img").unwrap().is_none());
 }

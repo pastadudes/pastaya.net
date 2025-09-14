@@ -26,10 +26,10 @@ pub fn init_counter() -> u32 {
     val
 }
 
-#[wasm_bindgen]
 /// Increments the counter.  
 /// It also checks if IS_PAUSED is true or not.  
 /// If IS_PAUSED is true then it doesn't increment, pretty simple
+#[wasm_bindgen]
 pub fn increment_counter() -> u32 {
     if IS_PAUSED.with(|p| p.get()) {
         return COUNTER.with(|c| c.get()); // Don't increment if paused
