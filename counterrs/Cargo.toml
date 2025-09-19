@@ -3,7 +3,7 @@ name = "counterrs"
 description = "a replacement for my old javascript based counter"
 license = "GPLv3"
 repository = "https://github.com/pastadudes/pastaya.net"          # not 100% true lol
-version = "1.0.0-rc5"
+version = "1.0.0-rc6"
 edition = "2024"
 
 [lib]
@@ -13,6 +13,7 @@ crate-type = ["cdylib"]
 web-sys = { version = "0.3", features = [
   "Window",
   "Document",
+  "Element",
   "Storage",
   "HtmlAudioElement",
   "HtmlImageElement",

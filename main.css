@@ -70,7 +70,7 @@ a:hover {
   background-color: none;
   color: white;
   padding: 10px;
-  animation: snapRotate 0.75s ease-in-out forwards;
+  /* animation: snapRotate 0.75s ease-in-out forwards; */
 }
 
 header {
@@ -97,6 +97,18 @@ header {
 }
 /* End Sobakin */
 
+#resetbtn {
+  background-color: #ff9a00;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
 .angled-header {
   margin-top: 3rem;
   margin-bottom: 3rem;

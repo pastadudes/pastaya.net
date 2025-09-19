@@ -66,4 +66,12 @@ pub fn set_counter(v: u32) {
 pub fn reset_counter() {
     COUNTER.with(|c| c.set(0));
     write_count_to_storage(0);
+    let document = web_sys::window()
+        .expect("NO WINDOW!")
+        .document()
+        .expect("bruh no document git gud");
+    let element = document
+        .get_element_by_id("counter")
+        .expect("bro your website doesn't work its missing the counter!!");
+    element.set_text_content(Some("0"));
 }
