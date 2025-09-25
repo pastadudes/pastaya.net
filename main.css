@@ -149,6 +149,7 @@ header {
   src: url("./assets/fonts/BigBlueTerm437NerdFont-Regular.ttf")
     format("truetype");
 }
+
 .bigblueterminated {
   font-family: "Big Blue Terminal 437 Nerd Font", monospace;
 }
