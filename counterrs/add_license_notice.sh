@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # you should run this as a git hook NOT cronjob
 LICENSE_HEADER=' /**
