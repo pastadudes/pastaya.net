@@ -1,6 +1,9 @@
- /**
+#!/bin/bash
+
+# you should run this as a git hook NOT cronjob
+LICENSE_HEADER=' /**
  *
- * @licstart  The following is the entire license notice for the 
+ * @licstart  The following is the entire license notice for the
  *  JavaScript code in this page.
  *
  * Copyright (C) 2025 pastaya
@@ -24,38 +27,16 @@
  * for the JavaScript code in this page.
  *
  */
+ '
 
-import init, {
-  increment_counter,
-  init_counter,
-  reset_counter,
-  set_counter
-} from "./counterrs/pkg/counterrs.js";
-
-async function main() {
-  await init();
-
-  const button = document.getElementById("nyabtn");
-  const counter = document.getElementById("counter");
-
-  counter.textContent = init_counter();
-
-  // we export functions so it can be run in console
-  window.set_counter = set_counter;
-  window.reset_counter = reset_counter;
-  window.increment_counter = increment_counter;
-  window.init_counter = init_counter;
-
-  let lastClick = 0;
-
-  // increment on click (hopefully)
-  button.addEventListener("click", () => {
-    const now = Date.now();
-    if (now - lastClick < 100) return; // HACK: very hacky way of "anticheat" and "debounce prevention"
-    lastClick = now;
-
-    counter.textContent = increment_counter();
-  });
-}
-
-main();
+# loop through all .js files in the pkg directory
+for file in pkg/*.js; do
+    # check if the license header is already in the file
+    if grep -q "Copyright (C) 2025 pastaya" "$file"; then
+        echo "license header already exists in $file. skipping."
+    else
+        # prepend the license header to each file
+        echo -e "$LICENSE_HEADER\n$(cat "$file")" > "$file"
+        echo "added license header to $file"
+    fi
+done

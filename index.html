@@ -15,76 +15,74 @@
 -->
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:title" content="pastaya's website" />
-    <meta property="og:description" content="my website" />
-    <meta property="og:url" content="https://pastaya.net" />
-    <meta
-      property="og:image"
-      content="https://pastaya.net/assets/images/carbonara.jpg"
-    />
-    <meta name="keywords" content="pastaya, spaghetti" />
-    <meta name="description" content="personal website for pastaya" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="pastaya.net" />
 
-    <title>pastaya's site</title>
-    <link rel="stylesheet" href="/main.css" />
-    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-      blocking="render"
-    />
-  </head>
-  <body>
-    <header>
-      <a href="/"><img src="/assets/images/logo.png" alt="logo" id="logo" /></a>
-      <div id="links">
-        <a href="https://github.com/pastadudes/pastaya.net">github</a>
-        <a href="mailto:contact@pastaya.net">email</a>
-        <a href="/blog/">blog</a>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:title" content="pastaya's website" />
+  <meta property="og:description" content="my website" />
+  <meta property="og:url" content="https://pastaya.net" />
+  <meta property="og:image" content="https://pastaya.net/assets/images/carbonara.jpg" />
+  <meta name="keywords" content="pastaya, spaghetti" />
+  <meta name="description" content="personal website for pastaya" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="pastaya.net" />
 
-    <div class="angled-header">
-      <h1 class="bigblueterminated">
-        pastaya's website: Home of Spaghetti since 2024
-      </h1>
+  <title>pastaya's site</title>
+  <link rel="stylesheet" href="/main.css" />
+  <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <a href="/"><img src="/assets/images/logo.png" alt="logo" id="logo" /></a>
+    <div id="links">
+      <a href="https://github.com/pastadudes/pastaya.net">github</a>
+      <a href="mailto:contact@pastaya.net">email</a>
+      <a href="/blog/">blog</a>
     </div>
+  </header>
 
-    <!-- yo uh the rotation is exactly at pi shh dont tell anyone -->
+  <div class="angled-header">
+    <h1 class="bigblueterminated">
+      pastaya's website: Home of Spaghetti since 2024
+    </h1>
+  </div>
 
-    <p>
-      i am pastaya, i do coding and no im not an egyptian/italian restaurant
-    </p>
+  <!-- yo uh the rotation is exactly at pi shh dont tell anyone -->
 
-    <div id="button">
-      <p id="counterElement">nya!: <span id="counter">0</span></p>
-      <button type="button" id="nyabtn">nya!</button>
-    </div>
+  <p>
+    i am pastaya, i do coding and no im not an egyptian/italian restaurant
+  </p>
 
-    <p>
-      you can commission me to make a tailored nix flake for your needs<br />
-      interested? lets <a href="nix/">talk.</a>
-    </p>
+  <div id="button">
+    <p id="counterElement">nya!: <span id="counter">0</span></p>
+    <button type="button" id="nyabtn">nya!</button>
+  </div>
 
-    <p>something broken? file an issue at the github repo</p>
+  <p>
+    you can commission me to make a tailored nix flake for your needs<br />
+    interested? lets <a href="nix/">talk.</a>
+  </p>
 
-    <footer>
-      <p id="credits">dark mode and other things by sobakintech</p>
-      <!-- contributed by nyx -->
-      <button type="button" id="resetbtn" onclick="reset_counter()">
-        reset counter
-      </button>
-    </footer>
+  <p>something broken? file an issue at the github repo</p>
 
-    <script type="module" src="main.js"></script>
-    <script type="text/vbscript">
+  <footer>
+    <p id="credits">dark mode and other things by sobakintech</p>
+    <!-- contributed by nyx -->
+    <button type="button" id="resetbtn" onclick="reset_counter()">
+      reset counter
+    </button>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+  <!-- this is what happens when bosses (that don't know tech) dictate their software -->
+  <script type="text/vbscript">
       ' the coming of the anti christ part 1
       For i = 1 To 100
         MsgBox "yo cuh did i just find a mf who uses ie in the great 2025????? suffer the wrath of 100 popups. you are at popup #" & i
@@ -102,6 +100,7 @@
         MsgBox "good and FUCKING replace that browser that shit can't even run wasm"
       End If
     </script>
-    <!-- must be sad for those ie users lol -->
-  </body>
+  <!-- must be sad for those ie users lol -->
+</body>
+
 </html>
