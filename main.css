@@ -44,34 +44,47 @@ a:hover {
   color: rgb(216, 216, 216);
 }
 
-#links > a {
-  padding: 3px;
-  background-color: #ff9a00;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
 #logo {
   width: 200px;
   height: 50px;
   border-radius: 10px;
 }
 
+/* links are fully mine now LETS GOOO sobakin doesn't own ts anymore */
 #links {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: none;
-  color: white;
-  padding: 10px;
-  /* animation: snapRotate 0.75s ease-in-out forwards; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  transform: skew(-20deg) scale(0.9);
+  margin-top: 5px;
+  margin-right: 5px;
 }
+
+#links>a {
+  display: inline-block;
+  background-color: #ff9a00;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+  /* we just apply a counter skew but we don't counter completely */
+  transform: skew(10deg);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+#links>a:hover {
+  background-color: #e76a00;
+  /* i know i said i won't follow trends but damn this would be cooler */
+  transform: scale(1.05) skew(10deg);
+  /* owo so big */
+}
+
 
 header {
   position: relative;
@@ -95,6 +108,7 @@ header {
     background-color 0.3s ease,
     box-shadow 0.3s ease;
 }
+
 /* End Sobakin */
 
 #resetbtn {
@@ -109,6 +123,7 @@ header {
     background-color 0.3s ease,
     box-shadow 0.3s ease;
 }
+
 .angled-header {
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -129,15 +144,19 @@ header {
   0% {
     transform: rotate(0deg);
   }
+
   60% {
     transform: rotate(0deg);
   }
+
   70% {
     transform: rotate(3.145926535deg);
   }
+
   80% {
     transform: rotate(2.005926535deg);
   }
+
   100% {
     transform: rotate(3.145926535deg);
   }
@@ -146,8 +165,7 @@ header {
 @font-face {
   font-family: "Big Blue Terminal 437 Nerd Font";
   font-display: swap;
-  src: url("./assets/fonts/BigBlueTerm437NerdFont-Regular.ttf")
-    format("truetype");
+  src: url("./assets/fonts/BigBlueTerm437NerdFont-Regular.ttf") format("truetype");
 }
 
 .bigblueterminated {
@@ -176,7 +194,8 @@ header {
     font-size: 1.8rem;
 
     line-height: 1.4;
-    hyphens: auto; /* let that shi have hyphens */
+    hyphens: auto;
+    /* let that shi have hyphens */
   }
 
   #links {
