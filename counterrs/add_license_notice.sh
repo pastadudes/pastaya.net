@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # you should run this as a git hook NOT cronjob
+
+set -euo pipefail # JUST incase
 LICENSE_HEADER=' /**
  *
  * @licstart  The following is the entire license notice for the
@@ -33,10 +35,12 @@ LICENSE_HEADER=' /**
 for file in pkg/*.js; do
     # check if the license header is already in the file
     if grep -q "Copyright (C) 2025 pastaya" "$file"; then
+        # this code is unreachable...
+        # wasm-pack will overwrite files so if you don't run this script twice, making this part never run
         echo "license header already exists in $file. skipping."
     else
         # prepend the license header to each file
-        echo -e "$LICENSE_HEADER\n$(cat "$file")" > "$file"
+        printf "%s\n%s" "$LICENSE_HEADER" "$(cat "$file")" > "$file"
         echo "added license header to $file"
     fi
 done
