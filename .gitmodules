@@ -1,0 +1,9 @@
+[submodule "assets"]
+	path = assets
+	url = https://github.com/pastaya-net/assets
+[submodule "blog"]
+	path = blog
+	url = https://github.com/pastaya-net/blog
+[submodule "counterrs"]
+	path = counterrs
+	url = https://github.com/pastaya-net/counterrs
