@@ -7,3 +7,6 @@
 [submodule "counterrs"]
 	path = counterrs
 	url = https://github.com/pastaya-net/counterrs
+[submodule "scripts"]
+	path = scripts
+	url = https://github.com/pastaya-net/scripts

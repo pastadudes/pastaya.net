@@ -107,10 +107,12 @@ header {
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease;
+  display: none;
 }
 
 /* End Sobakin */
 
+/* consider like uhhh mergin nyabtn and this together? */
 #resetbtn {
   background-color: #ff9a00;
   color: white;
@@ -122,6 +124,11 @@ header {
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease;
+  display: none;
+}
+
+#counterElement {
+  display: none;
 }
 
 .angled-header {
@@ -137,7 +144,8 @@ header {
   font-weight: bold;
   background: #ffaf00;
   padding: 0.5rem 1rem;
-  animation: snapRotate 0.75s ease-in-out forwards;
+  animation: snapRotate 1s cubic-bezier(.74, -0.1, .49, 2.42) forwards;
+  /* why so complicated?? */
 }
 
 @keyframes snapRotate {
