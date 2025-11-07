@@ -9,5 +9,5 @@ features:
 - a website
 
 ## cloning
-use `git clone --recurse-submodules https://github.com/pastaya-net/website`
+use `git clone --recurse-submodules https://github.com/pastaya-net/website`  
 if yo dumb ahh forgot the flag then do `git submodule init && git submodule update` and problem solved (hopefully)
