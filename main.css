@@ -107,7 +107,7 @@ header {
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease;
-  display: none;
+  /* display: none; */
 }
 
 /* End Sobakin */
@@ -124,12 +124,12 @@ header {
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease;
-  display: none;
+  /* display: none; */
 }
 
-#counterElement {
-  display: none;
-}
+/* #counterElement { */
+/* display: none; */
+/* } */
 
 .angled-header {
   margin-top: 3rem;
